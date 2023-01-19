@@ -10,16 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_203930) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_214706) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "reactions", force: :cascade do |t|
+    t.text "users", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "responses", force: :cascade do |t|
-    t.string "response_text", limit: 500
-    t.string "prompt_text", limit: 500
+    t.string "response", limit: 500
+    t.string "prompt", limit: 500
     t.integer "like", default: 0
     t.integer "love", default: 0
     t.integer "haha", default: 0
     t.integer "wow", default: 0
     t.integer "sad", default: 0
     t.integer "angry", default: 0
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
