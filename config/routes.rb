@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root "response#index"
+  root "home#index"
+
+  get "/responses", to: "response#index"
 end
