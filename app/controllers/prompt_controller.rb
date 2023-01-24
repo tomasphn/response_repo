@@ -4,8 +4,7 @@ class PromptController < ApplicationController
   end
 
   def show
-    @prompt = Prompt.find(params[:id])
-    # need prompt
-    # need generated responses
+    @prompt = Prompt.create("test prompt")
+    @prompt.generate_responses_reactions
   end
 end

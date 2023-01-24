@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_234758) do
   end
 
   create_table "responses", force: :cascade do |t|
-    t.string "text", limit: 500
+    t.string "text"
     t.bigint "prompt_id"
     t.bigint "user_id"
     t.index ["prompt_id"], name: "index_responses_on_prompt_id"

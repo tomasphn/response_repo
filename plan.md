@@ -32,13 +32,93 @@ Here is a general plan for building a system that meets the requirements you've 
 - Sign up Page
 - User Responses(Optional)
 
-**Todo**
-- Generate a bunch of user object seed data
-  - use ChatGPT for that, I need a sample object though
-- Create a Phrase (somebody searches it)
-  - Creates responses
-  - Assigns a random user to each response
-- Add functionality for person to add response
+**AI Generation**
+- Pulling up new prompt page
+  - 
+- Seed data
+
+***Sample object***
+[
+  {responseText: "I went to [my school]", likes: 3, loves: 0, haha: 0, wow: 2, sad: 4, angry: 1},
+  {responseText: "I studied at [my university]", likes: 5, loves: 1, haha: 0, wow: 3, sad: 2, angry: 0},
+  {responseText: "I received my education from [my college]", likes: 2, loves: 6, haha: 0, wow: 0, sad: 0, angry: 1},
+  {responseText: "My alma mater is [my school]", likes: 1, loves: 3, haha: 5, wow: 2, sad: 0, angry: 0},
+  {responseText: "I am self-taught", likes: 4, loves: 2, haha: 0, wow: 3, sad: 0, angry: 1}
+]
+
+- User searches phrase
+- Create prompt object for that prompt
+- GPT3 to generate
+  - Users/use existing users to create reaction
+  - Reaction(made by user) for prompt
+    - Reactions(made by user) for reaction
+
+- 10 seeded users plan
+- user searches a phrase
+- Create prompt object for that prompt
+  - Make responses
+    - choose number 3-6
+      - Choose random 3-6 users
+      - Use those user ids to create 3-6 response objects
+      - Ask gpt3 for 3-6 responses
+      - Create objects with those users + gpt3 responses
+  - Make reactions
+    - For each emotion, we choose a random number (or have ai create the random number)
+      - Create that amount of reaction objects
+        - 1 person per reaction type
+        - Choose random user from user pool (any user)
+
+user submits a request with a prompt
+  - create prompt object
+  - feeding prompt string to ai
+    - create 3-6 responses
+      - format?
+    - 
+
+[
+  {responseText: "I went to [my school] and studied hard to achieve my degrees. It was a challenging but ultimately rewarding experience.", likes: 3, loves: 0, haha: 0, wow: 2, sad: 0, angry: 1},
+  {responseText: "I studied at [my university] and received my degree in [major]. It was a great experience and I met a lot of wonderful people there.", likes: 5, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0},
+  {responseText: "I received my education from [my college], it was a great experience and I learned a lot. I am proud of my achievements.", likes: 2, loves: 6, haha: 0, wow: 0, sad: 0, angry: 0},
+  {responseText: "My alma mater is [my school], it was great experience and I am proud to have graduated from there.", likes: 1, loves: 3, haha: 5, wow: 2, sad: 0, angry: 0},
+  {responseText: "I am self-taught, I didn't go to school but I learned a lot from books and online resources.", likes: 4, loves: 2, haha: 0, wow: 3, sad: 0, angry: 1}
+]
+
+ai_array = [{text: "response1 text", likes: 1, loves: 3, haha: 5, wow: 2, sad: 0, angry: 0}, {"respone2 text", likes: 1, loves: 3, haha: 5, wow: 2, sad: 0, angry: 0}]
+prompt_id = current_prompt
+ai_array.each do |response|
+  random_user_id
+  hash = {text: response, prompt_id: prompt_id, user_id = random_user_id}
+  response = Response.create(hash) #=> response object
+  response_id = response.id
+  # run similar process to create reactions for this response
+  emotions = ["sad", "happy", "etc"]
+  emotions.each do |emotion|
+    rand_num
+    user_id_pool = get_seed_users
+    rand_num.times
+      random_user_id = user_id_pool.shift
+      reaction_hash = {emotion: emotion, response_id: response_id, user_id: random_user_id}
+    end
+  end
+end
+
+
+Response.create({text: "responsetext", prompt_id: id, user_id: id})
+
+response_hash = {text: "responsetext", prompt_id: id, user_id: id}
+Response.create(response_hash)
+
+**Todo: tomas**
+- Create Seed data
+- Create check for reactions that sees if reaction with same user_id/prompt_id/and emotion exists already
+- Add validation for reaction that is one of emotions(likes, loves, haha, wow, sad, angry)
+- Get all the data to prompt page that it needs
+  - prompt object
+    - preset
+      - all response objects
+      - all reaction objects for response objects
+  - add response field
+  - ability to add reactions
 
 *Prompt object*
 Prompt.new({text: "this is the prompt text"})
@@ -53,33 +133,3 @@ What if I have a @responses instance variable
 - accessing the author
   - JOIN responses and users, match by id
   - @reponse.author => ideal
-
-
-
-
-
-**Database**
-- Main Data: Responses
-  - id (PRIMARY KEY)
-  - response text (varchar 100)
-  - prompt text (varchar 100)
-  - emotions
-    - like (int)
-    - love (int)
-    - haha (int)
-    - wow (int)
-    - sad (int)
-    - angry (int)
-- Users
-  - id (PRIMARY KEY)
-  - username
-- Join: Reactions
-  - Reaction id
-  - emotions
-    - like
-      - array of user ids
-    - love
-    - haha
-    - wow
-    - sad
-    - angry
