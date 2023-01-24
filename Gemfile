@@ -9,7 +9,7 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use sqlite3 as the database for Active Record
+# Use psql as the database for Active Record
 gem "pg"
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -64,6 +64,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # debugging pry for rails
+  gem 'pry-rails'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

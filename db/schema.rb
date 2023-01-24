@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_234758) do
   enable_extension "plpgsql"
 
   create_table "prompts", force: :cascade do |t|
-    t.string "text", limit: 500
+    t.string "text", limit: 2000
   end
 
   create_table "reactions", force: :cascade do |t|
