@@ -113,10 +113,6 @@ Response.create(response_hash)
 - Create check for reactions that sees if reaction with same user_id/prompt_id/and emotion exists already
 - Add validation for reaction that is one of emotions(likes, loves, haha, wow, sad, angry)
 - Get all the data to prompt page that it needs
-  - prompt object
-    - preset
-      - all response objects
-      - all reaction objects for response objects
   - add response field
   - ability to add reactions
 

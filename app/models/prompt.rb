@@ -5,7 +5,13 @@ class Prompt < ApplicationRecord
   EMOTIONS = %w(likes loves haha wow sad angry)
 
   def generate_responses_reactions
-    generated_responses = gtp3_responses
+    generated_responses = [
+      {responseText: "My favorite movie is [The Shawshank Redemption], I love the story, the characters and the ending.", likes: 5, loves: 2, haha: 0, wow: 3, sad: 0, angry: 0},
+      {responseText: "I can't pick just one, but I love [The Godfather], [The Godfather Part II], and [The Godfather Part III] they are all amazing movies.", likes: 4, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0},
+      {responseText: "I adore the movie [The Dark Knight], I love the story, the characters and the acting, it's a masterpiece.", likes: 2, loves: 6, haha: 0, wow: 3, sad: 0, angry: 0},
+      {responseText: "One of my favorite movies is [Schindler's List], it's a powerful and moving film, it tells a very important story.", likes: 3, loves: 0, haha: 0, wow: 2, sad: 0, angry: 0},
+      {responseText: "I am a huge fan of [Forrest Gump], it's a heartwarming and funny film, I love the story, the characters and the acting.", likes: 5, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0}
+      ]
 
     generated_responses.each do |gen_response|
       response_hash = {text: gen_response[:responseText], user_id: SEED_USERS.sample}

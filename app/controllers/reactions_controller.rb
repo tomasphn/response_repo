@@ -1,4 +1,4 @@
-class ReactionController < ApplicationController
+class ReactionsController < ApplicationController
   def create
     @reaction = Reaction.new(params[:reaction])
     # check if reaction of same type for user on same post already exists
