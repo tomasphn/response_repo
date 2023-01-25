@@ -22,15 +22,55 @@ class Prompt < ApplicationRecord
     end
   end
 
-  private
+  # private
 
   def gtp3_responses
+    client = OpenAI::Client.new(access_token: "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")
+
+    # Still need to find a way to get user input
+    user_input = "Hey, I'm feeling a little down today."
+
+    # This is added to the prompt the user enters
+    final_input = <<~HEREDOC
+    Generate one more output following the input and output pairs that I provide below. The reactions are the likes, loves, hahas and et cetera, and they are numbers zero through ten and accurately portray the correct response. A sad response should not have many sad reactions for example. Vary the length of the responses a little bit, even more than to give an example. Do not repeat the samples that I give you below. Only give one output and nothing else.
+
+    Examples:
+
+    Input: "What is your favorite hobby?"
+    Output:
     [
-      {responseText: "I went to [my school] and studied hard to achieve my degrees. It was a challenging but ultimately rewarding experience.", likes: 3, loves: 0, haha: 0, wow: 2, sad: 0, angry: 1},
-      {responseText: "I studied at [my university] and received my degree in [major]. It was a great experience and I met a lot of wonderful people there.", likes: 5, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0},
-      {responseText: "I received my education from [my college], it was a great experience and I learned a lot. I am proud of my achievements.", likes: 2, loves: 6, haha: 0,  wow: 0, sad: 0,angry: 0},
-      {responseText: "My alma mater is [my school], it was great experience and I am proud to have graduated from there.", likes: 1, loves: 3, haha: 5, wow: 2, sad: 0, angry: 0},
-      {responseText: "I am self-taught, I didn't go to school but I learned a lot from books and online resources.", likes: 4, loves: 2, haha: 0, wow: 3, sad: 0, angry: 1}
+    {responseText: "My favorite hobby is reading, I love getting lost in a good book and escaping into different worlds.", likes: 5, loves: 2, haha: 0, wow: 3, sad: 0, angry: 0},
+    {responseText: "I love painting and drawing, it's a great way for me to express myself and be creative.", likes: 4, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0},
+    {responseText: "My hobby is playing music, it brings me so much joy and it's a great way to relax and unwind.", likes: 2, loves: 6, haha: 0, wow: 3, sad: 0, angry: 0},
+    {responseText: "I enjoy hiking and being outdoors, it's a great way to get some exercise and be surrounded by nature.", likes: 3, loves: 0, haha: 0, wow: 2, sad: 0, angry: 0},
+    {responseText: "I am a huge fan of cooking and experimenting with different recipes and ingredients, it's a lot of fun for me.", likes: 5, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0}
     ]
+
+    Input: "What is your favorite movie?"
+    Output:
+    [
+    {responseText: "My favorite movie is [The Shawshank Redemption], I love the story, the characters and the ending.", likes: 5, loves: 2, haha: 0, wow: 3, sad: 0, angry: 0},
+    {responseText: "I can't pick just one, but I love [The Godfather], [The Godfather Part II], and [The Godfather Part III] they are all amazing movies.", likes: 4, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0},
+    {responseText: "I adore the movie [The Dark Knight], I love the story, the characters and the acting, it's a masterpiece.", likes: 2, loves: 6, haha: 0, wow: 3, sad: 0, angry: 0},
+    {responseText: "One of my favorite movies is [Schindler's List], it's a powerful and moving film, it tells a very important story.", likes: 3, loves: 0, haha: 0, wow: 2, sad: 0, angry: 0},
+    {responseText: "I am a huge fan of [Forrest Gump], it's a heartwarming and funny film, I love the story, the characters and the acting.", likes: 5, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0}
+    ]
+
+    Input: #{user_input}
+    Output: 
+    HEREDOC
+
+    response = client.completions(
+        parameters: {
+              model: "text-davinci-003",
+              prompt: final_input,
+              max_tokens: 1000
+          })
+    # response["choices"].map do |a|
+    #   a["text"]
+    # end
+  Prompt.create(inp)
+  response_array = response["choices"].map {|a| a["text"]}
+  parsed_array = eval(response_array.first)
   end
 end
