@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   get "/responses", to: "response#index"
   get "/signin", to: "sessions#new"
+
+  get "/search", to: "home#search"
 end

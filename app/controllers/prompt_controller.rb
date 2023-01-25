@@ -4,7 +4,7 @@ class PromptController < ApplicationController
   end
 
   def show
-    @prompt = Prompt.create("test prompt")
-    @prompt.generate_responses_reactions
+    # @prompt = Prompt.create("test prompt")
+    # @prompt.generate_responses_reactions
   end
 end

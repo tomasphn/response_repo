@@ -24,7 +24,8 @@ class Prompt < ApplicationRecord
 
   # private
 
-  def gtp3_responses
+
+  def self.gtp3_responses
     client = OpenAI::Client.new(access_token: "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")
 
     # Still need to find a way to get user input
@@ -69,7 +70,7 @@ class Prompt < ApplicationRecord
     # response["choices"].map do |a|
     #   a["text"]
     # end
-  Prompt.create(inp)
+
   response_array = response["choices"].map {|a| a["text"]}
   parsed_array = eval(response_array.first)
   end

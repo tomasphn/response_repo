@@ -39,14 +39,13 @@ Sign in page
     <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
     <button class="bg-yellow-500 text-white p-2 rounded-lg">Sign out</button>
   </div>
-  <form class="mb-4" method="POST">
-    <div class="flex gap-4 mx-1">
-      <input type="text" class="border p-2 w-full" placeholder="Search for a prompt you'd like to see responses for">
-      <button class="bg-blue-500 text-white p-2 rounded-lg">
-        Search
-      </button>
-    </div>
-  </form>
+  <%= form_with url: "/search", class: "mb-4", method: :get do |form| %>
+      <div class="flex gap-4 mx-1">
+        <%= form.label :text %><br>
+        <%= form.text_field :text, class: "border p-2 w-full", placeholder: "Search for a prompt you'd like to see responses for" %>
+        <%= form.submit "Search", class: "bg-blue-500 text-white p-2 rounded-lg" %>
+      </div>
+  <% end %>
   <!--Fancy search bar
    <div class="mx-auto rounded-lg overflow-hidden">
     <div class="md:flex">
