@@ -37,7 +37,8 @@ Sign in page
 <div class="pt-10 h-screen bg-gray-300 px-20">
   <div class="flex justify-between mb-5 items-center">
     <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
-    <button class="bg-yellow-500 text-white p-2 rounded-lg">Sign out</button>
+    <%# <button class="bg-yellow-500 text-white p-2 rounded-lg">Sign out</button> %>
+    <%= render 'login' %>
   </div>
   <%= form_with url: "/search", class: "mb-4", method: :get do |form| %>
       <div class="flex gap-4 mx-1">
