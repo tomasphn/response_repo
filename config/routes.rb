@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   get "/responses", to: "response#index"
   get "/search", to: "home#search"
 
-  devise_for :users, :controllers => { registrations: 'users' }
-  post 'user_registration', to: 'users#create'
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
 
   resources :prompts do
     resources :responses do

@@ -7,13 +7,15 @@
       <h3>Response: <%= response.text %></h3>
     </div>
     <div class="my-3">
-      <div class="flex">
+      <% if response.user == current_user %>
+        <div class="flex">
         <%= link_to "Edit", edit_prompt_response_path(@prompt, response), class: "btn btn-gray mr-2" %>
         <%= link_to "Destroy", prompt_response_path(@prompt, response), data: {
           turbo_method: :delete,
           turbo_confirm: "Are you sure?"
         }, class: "btn btn-gray" %>
       </div>
+      <% end %>
     </div>
     <div class="my-3">
       <ul class="flex gap-3">
@@ -26,6 +28,6 @@
     </div>
   </div>
 <% end %>
-<%= render 'responses/form' %>
-
-
+<% if user_signed_in? %>
+  <%= render 'responses/form' %>
+<% end %>

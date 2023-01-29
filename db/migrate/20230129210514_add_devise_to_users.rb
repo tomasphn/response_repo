@@ -5,7 +5,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.0]
     rename_column :users, :name, :email
     rename_column :users, :password, :encrypted_password
     change_column_null :users, :email, false
-    change_column_default :users, :email, ""
+    change_column_default :users, :email, nil
 
     add_column :users, :reset_password_token, :string
     add_column :users, :reset_password_sent_at, :datetime
