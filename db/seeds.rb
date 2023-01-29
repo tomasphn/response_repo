@@ -6,8 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.create(name: "johndoe", password: "J0hnD0eP@ss")
-User.create(name: "katiejones", password: "Kat1eJ0n3s")
-User.create(name: "michaelb", password: "M!ch@elB")
-User.create(name: "sarahm", password: "S@r@hM123")
-User.create(name: "chrisw", password: "Chr!sW456")
+# Seed users to author ai generated responses/reactions
+User.create!(email: "john.doe@example.com", password: "password1")
+User.create!(email: "jane.doe@example.com", password: "password2")
+User.create!(email: "jim.smith@example.com", password: "password3")
+User.create!(email: "emily.brown@example.com", password: "password4")
+User.create!(email: "michael.lee@example.com", password: "password5")
