@@ -127,9 +127,12 @@ Response.create(response_hash)
 
 **Todo: tomas**
 - Add Delete button/methods for responses if they belong to that user
-- Get all the data to prompt page that it needs
-  - add response field
-  - ability to add reactions
+- Add devise to project
+  - Make faux login page/fields for now
+  - Make it so that edit/delete buttons only show up when response belongs to user
+  - Make it so that you can only add response if your logged in
+    - Limit how many responses you can make to a prompt?
+  - Make it so that you can only add reactions if you are logged in
 
 *Prompt object*
 Prompt.new({text: "this is the prompt text"})
