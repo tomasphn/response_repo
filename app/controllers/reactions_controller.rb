@@ -1,9 +1,13 @@
 class ReactionsController < ApplicationController
   def create
-    @reaction = Reaction.new(params[:reaction])
-    # check if reaction of same type for user on same post already exists
-    # if not, register new reaction
-    # emotion, user_id, response_id
-    # re render the page
+    @reaction = Reaction.create(params[:reaction])
+    redirect_to prompt_path(params[:prompt_id])
+  end
+
+  def destroy
+    @reaction = Reaction.find(params[:id])
+    @reaction.destroy
+
+    redirect_to prompt_path(params[:prompt_id])
   end
 end

@@ -31,6 +31,23 @@ Here is a general plan for building a system that meets the requirements you've 
 - Sign in Page
 - Sign up Page
 - User Responses(Optional)
+ **Validations**
+ - Users
+  - UI/js: No
+  - Model: Yes
+  - Active Record: Yes
+ - Prompts
+  - UI/js: No
+  - Model: Yes?(uniqueness?)
+  - Active Record: No
+ - Responses
+  - UI/js: No
+  - Model: Yes
+  - Active Record: No
+ - Reactions
+  - UI/js: Yes
+  - Model: Yes
+  - Active Record: No
 
 **AI Generation**
 - Pulling up new prompt page
@@ -109,9 +126,7 @@ response_hash = {text: "responsetext", prompt_id: id, user_id: id}
 Response.create(response_hash)
 
 **Todo: tomas**
-- Create Seed data
-- Create check for reactions that sees if reaction with same user_id/prompt_id/and emotion exists already
-- Add validation for reaction that is one of emotions(likes, loves, haha, wow, sad, angry)
+- Add Delete button/methods for responses if they belong to that user
 - Get all the data to prompt page that it needs
   - add response field
   - ability to add reactions
