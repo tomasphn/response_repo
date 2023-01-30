@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :prompts do
     resources :responses do
-      resources :reactions
+      resources :reactions, only: [:index, :create, :destroy]
     end
   end
 end

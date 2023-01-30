@@ -21,7 +21,19 @@
       <ul class="flex gap-3">
         <% response.reaction_counts.each do |emotion, count| %>
           <li>
-            <p><%= emotion %>: <%= count %></p>  
+            <p><%= emotion %>: <%= count %></p>
+            <% if user_signed_in? %>
+              <% if reaction = response.user_reaction(current_user, emotion) %>
+                <%= link_to "-", prompt_response_reaction_path(prompt_id: @prompt.id, response_id: response.id, id: reaction.id), data: { "turbo-method": :delete } %>
+              <% else %>
+                <form action="<%= prompt_response_reactions_path(prompt_id: @prompt.id, response_id: response.id) %>" method="post">
+                  <input type="hidden" name="reaction[emotion]" value="<%= emotion %>">
+                  <input type="hidden" name="reaction[user_id]" value="<%= current_user.id %>">
+                  <input type="hidden" name="reaction[response_id]" value="<%= response.id %>">
+                  <input type="submit" value="+">
+                </form>
+              <% end %>
+            <% end %>
           </li>
         <% end %>
       </ul>

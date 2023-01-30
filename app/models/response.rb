@@ -4,13 +4,16 @@ class Response < ApplicationRecord
   has_many :reactions, dependent: :destroy
 
   def reaction_counts
-    reactions.pluck(:emotion).tally
+    instances = reactions.pluck(:emotion)
+    p %w(likes loves haha wow sad angry).map {|emotion| [emotion, instances.count(emotion)]}.to_h
   end
 
-  def user_reaction_check
-    # change once can actually check user id
-    user_id = 1
-    user_reactions = reactions.where(user_id: user_id).pluck(:emotion)
+  def user_reaction_check(current_user)
+    user_reactions = reactions.where(user_id: current_user.id).pluck(:emotion)
     %w(likes loves haha wow sad angry).map {|emotion| [emotion, user_reactions.include?(emotion)]}.to_h
+  end
+
+  def user_reaction(current_user, emotion)
+    reactions.find_by(user_id: current_user.id, emotion: emotion)
   end
 end

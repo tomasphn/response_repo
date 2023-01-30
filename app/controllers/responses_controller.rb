@@ -1,4 +1,6 @@
 class ResponsesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @prompt = Prompt.find(params[:prompt_id])
     @prompt.responses.create(response_params)
