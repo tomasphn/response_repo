@@ -21,4 +21,5 @@ end
 # rails console => like binding.pry
 # Response.all
 # Response.find => return single response
-# 
+
+# testing Tony
