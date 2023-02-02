@@ -42,3 +42,6 @@ test.rb
 
 # plan file
 plan.md
+
+# API key
+/app/models/api_key.txt
