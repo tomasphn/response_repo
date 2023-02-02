@@ -1,45 +1,60 @@
-<div>
-  <h1>Prompt:<%= @prompt.text %></h1>
-</div>
-<% @prompt.responses.each do |response| %>
-  <div class="my-3">
+
+
+<div class="container">
+  <div class="pt-10 bg-gray-300 px-20">
+    <div class="flex justify-between mb-5 items-center">
+      <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
+      <%# <button class="bg-yellow-500 text-white p-2 rounded-lg">Sign out</button> %>
+      <%= render 'home/login' %>
+    </div>
+    <%= render 'home/search' %>
     <div>
-      <h3>Response: <%= response.text %></h3>
+      <h1>Prompt:<%= @prompt.text %></h1>
     </div>
-    <div class="my-3">
-      <% if response.user == current_user %>
-        <div class="flex">
-        <%= link_to "Edit", edit_prompt_response_path(@prompt, response), class: "btn btn-gray mr-2" %>
-        <%= link_to "Destroy", prompt_response_path(@prompt, response), data: {
-          turbo_method: :delete,
-          turbo_confirm: "Are you sure?"
-        }, class: "btn btn-gray" %>
+      <% @prompt.responses.each do |response| %>
+    <div class="border border-black mb-4 px-4 py-2">
+      <div>
+        <h3>Response: <%= response.text %></h3>
       </div>
-      <% end %>
-    </div>
-    <div class="my-3">
-      <ul class="flex gap-3">
-        <% response.reaction_counts.each do |emotion, count| %>
-          <li>
-            <p><%= emotion %>: <%= count %></p>
-            <% if user_signed_in? %>
-              <% if reaction = response.user_reaction(current_user, emotion) %>
-                <%= link_to "-", prompt_response_reaction_path(prompt_id: @prompt.id, response_id: response.id, id: reaction.id), data: { "turbo-method": :delete } %>
-              <% else %>
-                <form action="<%= prompt_response_reactions_path(prompt_id: @prompt.id, response_id: response.id) %>" method="post">
-                  <input type="hidden" name="reaction[emotion]" value="<%= emotion %>">
-                  <input type="hidden" name="reaction[user_id]" value="<%= current_user.id %>">
-                  <input type="hidden" name="reaction[response_id]" value="<%= response.id %>">
-                  <input type="submit" value="+">
-                </form>
-              <% end %>
-            <% end %>
-          </li>
+      <div class="my-3">
+        <% if response.user == current_user %>
+          <div class="flex">
+          <%= link_to "Edit", edit_prompt_response_path(@prompt, response), class: "btn btn-gray mr-2" %>
+          <%= link_to "Destroy", prompt_response_path(@prompt, response), data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+          }, class: "btn btn-gray" %>
+        </div>
         <% end %>
-      </ul>
+      </div>
+      <div class="my-3">
+        <ul class="flex gap-3">
+          <% response.reaction_counts.each do |emotion, count| %>
+            <li>
+              <% emotion_hash = { "loves" => "💖", "likes" => "👍", "wow" => "😲", "haha" => "😂", "sad" => "😢", "angry" => "😡"} %>
+              <p><%= emotion_hash[emotion] %> <%= count %></p>
+              <% if user_signed_in? %>
+                <% if reaction = response.user_reaction(current_user, emotion) %>
+                  <%= link_to "-", prompt_response_reaction_path(prompt_id: @prompt.id, response_id: response.id, id: reaction.id), data: { "turbo-method": :delete } %>
+                <% else %>
+                  <form action="<%= prompt_response_reactions_path(prompt_id: @prompt.id, response_id: response.id) %>" method="post">
+                    <input type="hidden" name="reaction[emotion]" value="<%= emotion %>">
+                    <input type="hidden" name="reaction[user_id]" value="<%= current_user.id %>">
+                    <input type="hidden" name="reaction[response_id]" value="<%= response.id %>">
+                    <input type="submit" value="+">
+                  </form>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= render 'responses/form' %>
+  <% end %>
   </div>
-<% end %>
-<% if user_signed_in? %>
-  <%= render 'responses/form' %>
-<% end %>
+</div>
+
+
