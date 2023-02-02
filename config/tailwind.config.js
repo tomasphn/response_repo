@@ -1,5 +1,4 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-https://tailwindcss.com/docs/guides/ruby-on-rails
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './public/*.html',
@@ -9,9 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
     },
   },
   plugins: [

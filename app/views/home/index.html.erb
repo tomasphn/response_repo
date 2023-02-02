@@ -1,65 +1,16 @@
 <% @user_input = "How am I?" %>
 <% @responses = ["im doin nifty", "im doing swell", "just fine, and you?"] %>
 
-
-<!-- 
-Sign in page
-<div class="bg-gray-200 h-screen flex flex-col justify-center items-center">
-  <form class="bg-white p-6 rounded-lg">
-    <h2 class="text-lg font-medium mb-4">Sign In</h2>
-    <div class="mb-4">
-      <label class="block text-gray-700 font-medium mb-2">Email</label>
-      <input 
-        type="email"
-        class="border border-gray-400 p-2 rounded-lg w-full"
-        placeholder="Enter your email"
-      >
-    </div>
-    <div class="mb-4">
-      <label class="block text-gray-700 font-medium mb-2">Password</label>
-      <input 
-        type="password"
-        class="border border-gray-400 p-2 rounded-lg w-full"
-        placeholder="Enter your password"
-      >
-    </div>
-    <button class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
-      Sign In
-    </button>
-  </form>
-</div> -->
-
-
 <div class="container bg-gray">
   
 
 
-<div class="pt-10 h-screen bg-gray-300 px-20">
+<div class="pt-10 h-screen bg-zinc-900 px-20">
   <div class="flex justify-between mb-5 items-center">
     <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
-    <%# <button class="bg-yellow-500 text-white p-2 rounded-lg">Sign out</button> %>
     <%= render 'login' %>
   </div>
-  <%= form_with url: "/search", class: "mb-4", method: :get do |form| %>
-      <div class="flex gap-4 mx-1">
-        <%= form.label :prompt_text %><br>
-        <%= form.text_field :prompt_text, class: "border p-2 w-full", placeholder: "Search for a prompt you'd like to see responses for" %>
-        <%= form.submit "Search", class: "bg-blue-500 text-white p-2 rounded-lg" %>
-      </div>
-  <% end %>
-  <!--Fancy search bar
-   <div class="mx-auto rounded-lg overflow-hidden">
-    <div class="md:flex">
-        <div class="w-full py-3 px-1">          
-          <div class="relative">
-            <button class="inline-block bg-blue-500 text-white p-2 rounded-lg">Search</button>
-            <i class="absolute fa fa-search text-gray-400 top-5 left-4"></i>
-            <input type="text" placeholder="Search for a prompt you'd like to see responses for" class="bg-white h-14 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer" name="">
-            <span class="absolute top-4 right-5 border-l pl-4"><i class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"></i></span>
-          </div>          
-        </div>    
-    </div>
-  </div> -->
+  <%= render 'search' %>
   <div class="px-1">
     <h2 class="text-xl font-bold mb-2">Prompt</h2>
     <p class="mb-2">How are you?</p>
@@ -78,6 +29,7 @@ Sign in page
   
 
   <div class="word-definition">
-    <!-- Repeat the above structure for additional words/definitions -->
   </div>
+
+
 </div>
