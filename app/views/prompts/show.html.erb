@@ -9,7 +9,9 @@
     </div>
     <%= render 'home/search' %>
     <div>
-      <h1>Prompt:<%= @prompt.text %></h1>
+      <h1 class="text-xl font-bold mb-2">Prompt</h1>
+      <p class="mb-2"><%= @prompt.text %></p>
+      <h3 class="text-lg font-bold mb-1">Responses</h3>
     </div>
       <% @prompt.responses.each do |response| %>
     <div class="border border-black mb-4 px-4 py-2">
@@ -32,16 +34,15 @@
           <% response.reaction_counts.each do |emotion, count| %>
             <li>
               <% emotion_hash = { "loves" => "💖", "likes" => "👍", "wow" => "😲", "haha" => "😂", "sad" => "😢", "angry" => "😡"} %>
-              <p><%= emotion_hash[emotion] %> <%= count %></p>
               <% if user_signed_in? %>
                 <% if reaction = response.user_reaction(current_user, emotion) %>
-                  <%= link_to "-", prompt_response_reaction_path(prompt_id: @prompt.id, response_id: response.id, id: reaction.id), data: { "turbo-method": :delete } %>
+                  <%= link_to "#{emotion_hash[emotion] + count.to_s}", prompt_response_reaction_path(prompt_id: @prompt.id, response_id: response.id, id: reaction.id), data: { "turbo-method": :delete } %>
                 <% else %>
                   <form action="<%= prompt_response_reactions_path(prompt_id: @prompt.id, response_id: response.id) %>" method="post">
                     <input type="hidden" name="reaction[emotion]" value="<%= emotion %>">
                     <input type="hidden" name="reaction[user_id]" value="<%= current_user.id %>">
                     <input type="hidden" name="reaction[response_id]" value="<%= response.id %>">
-                    <input type="submit" value="+">
+                    <input style="opacity: .5" type="submit" value="<%= emotion_hash[emotion] %>"><span><%= count.to_s %></span>
                   </form>
                 <% end %>
               <% end %>
