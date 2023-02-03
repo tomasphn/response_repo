@@ -1,3 +1,5 @@
+## Response Repo
+
 This Ruby on Rails application uses GPT-3 to generate responses to phrases and features a user login system that allows users to comment and react.
 
 ## Getting Started
@@ -15,7 +17,7 @@ Before getting started, you need to have the following installed on your system:
 
 1. Clone the repository: 
 
-```$ git clone [https://github.com/tomasphn/response_repo.git]```
+  ```$ git clone [https://github.com/tomasphn/response_repo.git]```
 
 2. Navigate to the project directory:
 
