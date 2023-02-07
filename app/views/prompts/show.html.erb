@@ -3,8 +3,9 @@
 <div class="container">
   <div class="pt-10 bg-zinc-900 px-20">
     <div class="flex justify-between mb-5 items-center">
-      <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
-      <%# <button class="bg-yellow-500 text-white p-2 rounded-lg">Sign out</button> %>
+      <%= link_to root_path, class: "no-underline" do %>
+        <h1 class="mx-1 text-2xl font-bold mb-4">Response Repo 💭</h1>
+      <% end %>
       <%= render 'home/login' %>
     </div>
     <%= render 'home/search' %>
@@ -45,6 +46,8 @@
                     <input style="opacity: .5" type="submit" value="<%= emotion_hash[emotion] %>"><span><%= count.to_s %></span>
                   </form>
                 <% end %>
+              <% else %>
+                <%= "#{emotion_hash[emotion]} #{count}" %>
               <% end %>
             </li>
           <% end %>
