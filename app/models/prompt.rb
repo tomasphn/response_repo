@@ -31,7 +31,7 @@ class Prompt < ApplicationRecord
 
     # This is added to the prompt the user enters
     final_input = <<~HEREDOC
-    Generate one more output following the input and output pairs that I provide below. The reactions are the likes, loves, hahas and et cetera, and they are numbers zero through ten and accurately portray the correct response. A sad response should not have many sad reactions for example. Vary the length of the responses a little bit, even more than to give an example. Do not repeat the samples that I give you below. Only give one output and nothing else.
+    Generate one more output following the input and output pairs that I provide below. The reactions are always likes, loves, haha, wow, sad, and angry, and they are numbers zero through ten and accurately portray the correct response. A sad response should not have many sad reactions for example. Vary the length of the responses a little bit, even more than to give an example. Do not repeat the samples that I give you below. Only give one output and nothing else.
 
     Examples:
 
