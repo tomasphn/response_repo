@@ -23,10 +23,7 @@ class Prompt < ApplicationRecord
   end
 
   def gtp3_responses
-    file_path = Rails.root.join("app", "models", "api_key.txt")
-    file = File.open(file_path, "r")
-    api_key = file.read
-    file.close
+    api_key = API_KEY
     client = OpenAI::Client.new(access_token: api_key)
 
     # Still need to find a way to get user input

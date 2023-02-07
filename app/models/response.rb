@@ -5,7 +5,7 @@ class Response < ApplicationRecord
 
   def reaction_counts
     instances = reactions.pluck(:emotion)
-    p %w(likes loves haha wow sad angry).map {|emotion| [emotion, instances.count(emotion)]}.to_h
+    %w(likes loves haha wow sad angry).map {|emotion| [emotion, instances.count(emotion)]}.to_h
   end
 
   def user_reaction_check(current_user)
