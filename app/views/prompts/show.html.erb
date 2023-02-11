@@ -1,7 +1,7 @@
 
 
 <div class="container">
-  <div class="pt-10 bg-zinc-900 px-20">
+  <div class="pt-10 px-20">
     <div class="flex justify-between mb-5 items-center">
       <%= link_to root_path, class: "no-underline" do %>
         <h1 class="mx-1 text-2xl font-bold mb-4">Response Repo 💭</h1>
@@ -15,7 +15,7 @@
       <h3 class="text-lg font-bold mb-1">Responses</h3>
     </div>
       <% @prompt.responses.each do |response| %>
-    <div class="border border-black mb-4 px-4 py-2">
+    <div class="border border-black bg-zinc-900 mb-4 px-4 py-2">
       <div>
         <h3>Response: <%= response.text %></h3>
       </div>
@@ -26,7 +26,7 @@
           <%= link_to "Destroy", prompt_response_path(@prompt, response), data: {
             turbo_method: :delete,
             turbo_confirm: "Are you sure?"
-          }, class: "btn btn-gray" %>
+          }, class: "text-black btn btn-gray" %>
         </div>
         <% end %>
       </div>

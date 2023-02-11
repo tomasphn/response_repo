@@ -38,7 +38,6 @@ class Prompt < ApplicationRecord
     Input: "wat ur fav hobby?"
     Output:
     [
-    {correctText: "What is your favorite hobby"},
     {responseText: "My favorite hobby is reading, I love getting lost in a good book and escaping into different worlds.", likes: 5, loves: 2, haha: 0, wow: 3, sad: 0, angry: 0},
     {responseText: "I love painting and drawing, it's a great way for me to express myself and be creative.", likes: 4, loves: 1, haha: 0, wow: 3, sad: 0, angry: 0},
     {responseText: "My hobby is playing music, it brings me so much joy and it's a great way to relax and unwind.", likes: 2, loves: 6, haha: 0, wow: 3, sad: 0, angry: 0},
