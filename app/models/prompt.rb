@@ -58,7 +58,7 @@ class Prompt < ApplicationRecord
         parameters: {
               model: "text-davinci-003",
               prompt: final_input,
-              max_tokens: 500
+              max_tokens: 400
           })
     response["choices"].map do |a|
       a["text"]
