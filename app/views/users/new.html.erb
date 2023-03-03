@@ -1,12 +1,12 @@
 <%= form_for(@user, url: user_registration_path) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email, autofocus: true, class: "form-control" %>
-
-  <%= f.label "Password (6 characters minimum)" %>
-  <%= f.password_field :password, class: "form-control" %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, class: "form-control" %>
-
-  <%= f.submit "Sign up", class: "bg-blue btn btn-primary" %>
+  <div class="flex flex-col gap-3 mt-10">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, class: "form-control text-black" %>
+    <%= f.label "Password (6 characters minimum)" %>
+    <%= f.password_field :password, class: "form-control text-black" %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control text-black" %>
+    <%= f.submit "Sign up", class: "rounded-lg bg-blue-500 p-2 cursor-pointer" %>
+    <%= link_to "Home", root_path, class: "rounded-lg p-2 cursor-pointer text-center text-blue-500 border-2 border-blue-500 font-bold" %>
+  </div>
 <% end %>
