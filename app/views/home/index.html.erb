@@ -1,35 +1,58 @@
-<% @user_input = "How am I?" %>
-<% @responses = ["im doin nifty", "im doing swell", "just fine, and you?"] %>
-
 <div class="container bg-gray">
-  
-
-
-<div class="pt-10 h-screen px-20">
-  <div class="flex justify-between mb-5 items-center">
-    <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
-    <%= render 'login' %>
-  </div>
-  <%= render 'search' %>
-  <div class="px-1">
-    <h2 class="text-xl font-bold mb-2">Prompt</h2>
-    <p class="mb-2">How are you?</p>
-    
-    <% if @prompts.include?(@user_input) %>
-      <p class="mb-2"><%= @user_input %></p>
-    <% end %>
-
-    <div class="example">
-      <h3 class="text-lg font-bold mb-1">Responses</h3>
-      <%= render partial: 'response', collection: @responses %>
+  <div class="pt-10 h-screen px-20">
+    <div class="flex justify-between mb-5 items-center">
+      <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
+      <%= render 'login' %>
     </div>
+    <%= render 'search' %>
+    <div>
+      <h1 class="text-xl font-bold mb-2">Prompt</h1>
+      <p class="mb-2"><%= @prompt.text %></p>
+      <h3 class="text-lg font-bold mb-1">Responses</h3>
+    </div>
+      <% @prompt.responses.each do |response| %>
+    <div class="border border-black bg-zinc-900 mb-4 px-4 py-2">
+      <div>
+        <h3>Response: <%= response.text %></h3>
+      </div>
+      <div class="my-3">
+        <% if response.user == current_user %>
+          <div class="flex">
+          <%= link_to "Edit", edit_prompt_response_path(@prompt, response), class: "btn btn-gray mr-2" %>
+          <%= link_to "Destroy", prompt_response_path(@prompt, response), data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+          }, class: "text-black btn btn-gray" %>
+        </div>
+        <% end %>
+      </div>
+      <div class="my-3">
+        <ul class="flex gap-3">
+          <% response.reaction_counts.each do |emotion, count| %>
+            <li>
+              <% emotion_hash = { "loves" => "💖", "likes" => "👍", "wow" => "😲", "haha" => "😂", "sad" => "😢", "angry" => "😡"} %>
+              <% if user_signed_in? %>
+                <% if reaction = response.user_reaction(current_user, emotion) %>
+                  <%= link_to "#{emotion_hash[emotion] + count.to_s}", prompt_response_reaction_path(prompt_id: @prompt.id, response_id: response.id, id: reaction.id), data: { "turbo-method": :delete } %>
+                <% else %>
+                  <form action="<%= prompt_response_reactions_path(prompt_id: @prompt.id, response_id: response.id) %>" method="post">
+                    <input type="hidden" name="reaction[emotion]" value="<%= emotion %>">
+                    <input type="hidden" name="reaction[user_id]" value="<%= current_user.id %>">
+                    <input type="hidden" name="reaction[response_id]" value="<%= response.id %>">
+                    <input style="opacity: .5" type="submit" value="<%= emotion_hash[emotion] %>"><span><%= count.to_s %></span>
+                  </form>
+                <% end %>
+              <% else %>
+                <%= "#{emotion_hash[emotion]} #{count}" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= render 'responses/form' %>
+  <% end %>
   </div>
-</div>
-
-  
-
-  <div class="word-definition">
-  </div>
-
-
 </div>

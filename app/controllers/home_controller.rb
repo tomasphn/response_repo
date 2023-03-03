@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @prompts = Prompt.all
+    @prompt = Prompt.order("RANDOM()").first
   end
 
   def search
