@@ -1,6 +1,6 @@
 <div class="container bg-gray">
   <div class="pt-10 h-screen px-20">
-    <div class="flex justify-between mb-5 items-center">
+    <div class="flex justify-between mb-5 items-start">
       <h1 class="mx-1 text-2xl font-bold mb-4">What to Say 💭</h1>
       <%= render 'login' %>
     </div>
@@ -8,12 +8,12 @@
     <div>
       <h1 class="text-xl font-bold mb-2">Prompt</h1>
       <p class="mb-2"><%= @prompt.text %></p>
-      <h3 class="text-lg font-bold mb-1">Responses</h3>
+      <h3 class="text-lg font-bold mb-4">Responses</h3>
     </div>
       <% @prompt.responses.each do |response| %>
-    <div class="border border-black bg-zinc-900 mb-4 px-4 py-2">
+    <div class="border border-white bg-transparent mb-4 px-4 py-2">
       <div>
-        <h3>Response: <%= response.text %></h3>
+        <h3><%= response.text %></h3>
       </div>
       <div class="my-3">
         <% if response.user == current_user %>
